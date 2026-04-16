@@ -1,0 +1,8 @@
+CompileFlags:
+  Add:
+    - "-I/usr/include/qt6"
+    - "-I/usr/include/qt6/QtCore"
+    - "-I/usr/include/qt6/QtQml"
+    - "-I/usr/include/qt6/QtGui"
+  Remove:
+    - "-mno-direct-extern-access"
