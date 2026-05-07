@@ -2,13 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 project(cleave)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
-
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Install path prefix" FORCE)
-endif()
-
 find_package(Qt6 REQUIRED COMPONENTS Core Qml Gui)
-set(QML_IMPORT_PATH "${CMAKE_INSTALL_PREFIX}" CACHE STRING "" FORCE)
 
 qt_add_qml_module(cleave
   URI Cleave
@@ -17,11 +11,29 @@ qt_add_qml_module(cleave
       cleave.cpp
       cleave.hpp
   NO_PLUGIN_OPTIONAL
-  OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/Cleave"
+  OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/Cleave"
 )
 
 target_link_libraries(cleave PRIVATE
     Qt6::Core
     Qt6::Qml
     Qt6::Gui
+)
+
+set(QML_INSTALL_DIR lib/qt6/qml/Cleave)
+
+install(TARGETS cleave
+    LIBRARY DESTINATION lib
+)
+
+install(TARGETS cleaveplugin
+    LIBRARY DESTINATION ${QML_INSTALL_DIR}
+)
+
+install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/Cleave/"
+    DESTINATION ${QML_INSTALL_DIR}
+    FILES_MATCHING
+    PATTERN "*.qmltypes"
+    PATTERN "qmldir"
+    PATTERN "*.qrc"
 )

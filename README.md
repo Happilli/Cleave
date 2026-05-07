@@ -101,14 +101,7 @@ Cleave exposes magnitudes and peaks  which are updated on every dataChanged sign
   </tbody>
 </table>
 
-
-## development
-- clone
-- mkdir build
-- cd build
-- cmake -DCMAKE_INSTALL_PREFIX=$HOME/.local/lib/qt6/qml ..
-- make
-- expose the plugin at startup: ``` LD_LIBRARY_PATH=$HOME/.local/lib/qt6/qml 
-QML2_IMPORT_PATH=$HOME/.local/lib/qt6/qml ```
-- begin the usage!!
+# how to install?
+`` paru -S cleave``
+ begin the usage!!
 
